@@ -1,0 +1,118 @@
+tags:
+- name: addresses
+  description: Wallet Addresses API
+
+paths:
+  /get-balance:
+    get:
+      tags:
+      - addresses
+      summary: Get All Wallet Addresses with Balances
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/addressesWithBalanceArray'
+        500:
+          description: 'Server Error'
+  /addresses:
+    get:
+      tags:
+      - addresses
+      summary: Find All Wallet Addresses
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - addresses
+      summary: Add Wallet Addresses
+      parameters:
+      - name: body
+        in: body
+        description: Addresses
+        required: true
+        schema:
+          $ref: '#/definitions/addressArray'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /addresses/{addressId}:
+    delete:
+      tags:
+      - addresses
+      summary: Delete Wallet
+      parameters:
+      - name: id
+        in: path
+        description: Wallet Id
+        required: true
+        type: string
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  addressArray:
+    type: object
+    properties:
+      addresses:
+        type: array
+        items:
+          $ref: '#/definitions/addresses'
+  addressesWithBalanceArray:
+    type: object
+    properties:
+      addresses:
+        type: array
+        items:
+          $ref: '#/definitions/addressesWithBalance'
+  addresses:
+    type: object
+    required:
+        - walletAddress
+        - name
+    properties:
+      walletAddress:
+        type: string
+        description: Wallet Address
+      name:
+        type: string
+        description: Wallet Name
+  addressesWithBalance:
+    type: object
+    required:
+        - walletAddress
+        - name
+    properties:
+      walletAddress:
+        type: string
+        description: Wallet Address
+      name:
+        type: string
+        description: Wallet Name
+      balance:
+        type: string
+        description: Wallet Balance
+
+
+schemes:
+ - https
+ - http
