@@ -11,6 +11,7 @@ Task link: https://gist.github.com/AdamPetroff/55a8fe4c68d6501d311963059811abf3
 * install node with npm
 * install pnpm by running "`npm i -g pnpm`"
 * install all dependencies by running "`pnpm i`"
+* generate prisma by running "`pnpm prisma:generate`"
 * create a `.env.development.local` file with using the `.env.sample` file as template
   * `PORT` - the port number to be used by the api
   * `DATABASE_URL` - path of the sqlite database
